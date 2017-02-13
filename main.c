@@ -749,20 +749,20 @@ int main (int argc, const char *argv[])
                                             
     RawDeviceRemoved(&param, gRawRemovedIter);	// Iterate once to arm the notification
     
-    // Change the USB product ID in our matching dictionary to the one the device will have once the
-    // firmware has been downloaded.
-    printf("Downloaded devices should match vendor ID=0x%04x and product ID=0x%04x\n", usbVendor2, usbProduct2);
-    
-    CFDictionarySetValue( 
-            matchingDict, 
-            CFSTR(kUSBVendorID), 
-            CFNumberCreate(kCFAllocatorDefault, kCFNumberSInt32Type, &usbVendor2)); 
-    CFDictionarySetValue( 
-            matchingDict, 
-            CFSTR(kUSBProductID), 
-            CFNumberCreate(kCFAllocatorDefault, kCFNumberSInt32Type, &usbProduct2)); 
-
 	if(param.nousb == 0) {
+		// Change the USB product ID in our matching dictionary to the one the device will have once the
+		// firmware has been downloaded.
+		printf("Downloaded devices should match vendor ID=0x%04x and product ID=0x%04x\n", usbVendor2, usbProduct2);
+		
+		CFDictionarySetValue( 
+							 matchingDict, 
+							 CFSTR(kUSBVendorID), 
+							 CFNumberCreate(kCFAllocatorDefault, kCFNumberSInt32Type, &usbVendor2)); 
+		CFDictionarySetValue( 
+							 matchingDict, 
+							 CFSTR(kUSBProductID), 
+							 CFNumberCreate(kCFAllocatorDefault, kCFNumberSInt32Type, &usbProduct2)); 
+		
 		// Now set up two more notifications, one to be called when a new test device is first matched by I/O Kit, and the other to be
 		// called when the device is terminated.
 		kr = IOServiceAddMatchingNotification(  gNotifyPort,

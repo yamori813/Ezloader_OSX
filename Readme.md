@@ -23,3 +23,5 @@ option
 -r raw binary file
 
 -f filename
+
+tested at AN2131 and CY7C68013A

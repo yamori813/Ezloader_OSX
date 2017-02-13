@@ -57,7 +57,8 @@
 #ifndef __hex2c__
 #define __hex2c__
 
-#define MAX_INTEL_HEX_RECORD_LENGTH 16
+//#define MAX_INTEL_HEX_RECORD_LENGTH 16
+#define MAX_INTEL_HEX_RECORD_LENGTH 32
 typedef struct _INTEL_HEX_RECORD
 {
    UInt32  	Length;
