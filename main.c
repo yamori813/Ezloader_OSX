@@ -501,7 +501,7 @@ void RawDeviceRemoved(void *refCon, io_iterator_t iterator)
         printf("Raw device removed.\n");
         kr = IOObjectRelease(obj);
 		if(param->nousb ==1) {
-			exit(1);
+			exit(0);
 		}
     }
 }
