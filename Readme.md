@@ -20,6 +20,8 @@ option
 
 -n No USB firmware or not wait new USB Device 
 
+-d demon mode
+
 -r raw binary file
 
 -f filename

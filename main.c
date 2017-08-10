@@ -110,6 +110,7 @@ struct ezloader {
 	int chiptype;
 	int intelhex;
 	int nousb;
+	int demon;
 	char *filename;
 };
 
@@ -500,7 +501,7 @@ void RawDeviceRemoved(void *refCon, io_iterator_t iterator)
     {
         printf("Raw device removed.\n");
         kr = IOObjectRelease(obj);
-		if(param->nousb ==1) {
+		if(param->demon == 0 && param->nousb == 1) {
 			exit(0);
 		}
     }
@@ -619,8 +620,9 @@ int main (int argc, const char *argv[])
 	param.intelhex = 1;
 	param.filename = nil;
 	param.nousb = 0;
+	param.demon = 0;
 	
-	while ((ch = getopt(argc,argv,"?v:p:V:P:f:Frn")) != -1) {
+	while ((ch = getopt(argc,argv,"?v:p:V:P:f:Frnd")) != -1) {
 		    switch (ch) {
 				case 'v':
 					if(strncmp(optarg, "0x", 2) == 0)
@@ -651,6 +653,9 @@ int main (int argc, const char *argv[])
 					break;
 				case 'n':
 					param.nousb = 1;
+					break;
+				case 'd':
+					param.demon = 1;
 					break;
 				case 'f':
 					param.filename = optarg;
@@ -749,7 +754,7 @@ int main (int argc, const char *argv[])
                                             
     RawDeviceRemoved(&param, gRawRemovedIter);	// Iterate once to arm the notification
     
-	if(param.nousb == 0) {
+	if(param.nousb == 0 || param.demon == 0) {
 		// Change the USB product ID in our matching dictionary to the one the device will have once the
 		// firmware has been downloaded.
 		printf("Downloaded devices should match vendor ID=0x%04x and product ID=0x%04x\n", usbVendor2, usbProduct2);
