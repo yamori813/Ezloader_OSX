@@ -25,3 +25,10 @@ option
 -f filename
 
 tested at AN2131 and CY7C68013A
+
+examples
+
+Download sigrok firmware to FX2 module
+
+% Ezload  -v 0x04b4 -p 0x8613 -n -F -r -f fx2lafw-saleae-logic.fw
+
